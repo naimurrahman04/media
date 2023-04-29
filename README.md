@@ -6,6 +6,7 @@ https://pypi.org/project/auto-py-to-exe/#description
 4. copy the download link
 5. Download or copy autoit script
 6. past a image link on autoit url1 and url2
+7. Run the autoit script
 
 
 
